@@ -69,7 +69,7 @@ fi
    
 
 # 验证安装
-getidf
+. $HOME/esp/esp-idf/export.sh
 echo -e "\n${GREEN}安装完成！验证安装...${NC}"
 idf.py --version || {
     echo -e "${RED}验证失败，请检查安装${NC}"
