@@ -73,7 +73,7 @@ echo ">>> 安装常见依赖库..."
 sudo apt install -y libxcb-xinerama0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1
 
 echo ">>> 安装附加Qt模块..."
-sudo apt-get install qtdeclarative5-dev
+sudo apt-get install qtdeclarative5-dev -y
 sudo apt-get install -y \
     qt5-doc \
     qt5-image-formats-plugins \

@@ -1,7 +1,10 @@
 
+
+
 sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
 
-
+cd
+mkdir esp
 cd ~/esp
 git clone -b v5.3.3 --recursive https://github.com/espressif/esp-idf.git
 # git clone -b release/v5.3 https://gitee.com/EspressifSystems/esp-idf.git

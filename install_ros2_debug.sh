@@ -1,18 +1,14 @@
 #!/bin/bash
 # ROS 2 Humble Hawksbill Installation Script for Ubuntu
-# 修改版：只输出进度提示，其他输出静默
+# Reference: https:
 
+#set -euo pipefail
 set -e
-
-# 定义静默执行函数
-quiet() {
-    "$@" > /dev/null 2>&1
-}
 
 # 颜色定义
 RED='\033[0;31m'
 GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
+YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
 # 检查是否为root用户
@@ -39,7 +35,7 @@ while true; do
     if [[ "$install_type" =~ ^[12]$ ]]; then
         break
     else
-        clear
+	clear
         echo -e "${RED}错误：请输入1或2${NC}"
     fi
 done
@@ -67,18 +63,27 @@ while true; do
         fi
         break
     else
-        clear
+    	clear
         echo -e "${RED}错误：请输入Y或N${NC}"
     fi
 done
 
+# 函数：执行命令并检查状态
+run_command() {
+    echo -e "\n${GREEN}[执行]${NC} $*"
+    if ! "$@"; then
+        echo -e "${RED}错误：命令执行失败${NC}"
+        exit 1
+    fi
+}
+
 # 1. 设置区域设置
 echo -e "\n${YELLOW}[1/5] 设置区域配置${NC}"
-#locale  # check for UTF-8
+locale  # check for UTF-8
 
-quiet sudo apt update && quiet sudo apt install locales -y
-quiet sudo locale-gen en_US.UTF-8
-quiet sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US
+sudo apt update && sudo apt install locales -y
+sudo locale-gen en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US
 export LC_ALL=en_US.UTF-8
@@ -90,33 +95,34 @@ echo -e "如果报错执行：sudo dpkg-reconfigure locales，在界面中选择
 
 # 2. 设置软件源
 echo -e "\n${YELLOW}[2/5] 配置软件源${NC}"
-quiet sudo apt install software-properties-common -y
-quiet sudo add-apt-repository universe -y
+sudo apt install software-properties-common -y
+sudo add-apt-repository universe -y
 
 # 3. 安装ROS 2 APT源
 echo -e "\n${YELLOW}[3/5] 配置ROS 2 APT源${NC}"
-quiet sudo apt update
-quiet sudo apt install curl -y
+sudo apt update
+sudo apt install curl -y
 
-quiet sudo apt update && quiet sudo apt install curl -y
+sudo apt update && sudo apt install curl -y
 export ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -F "tag_name" | awk -F\" '{print $4}')
-quiet curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo $VERSION_CODENAME)_all.deb" # If using Ubuntu derivates use $UBUNTU_CODENAME
-quiet sudo apt install /tmp/ros2-apt-source.deb
+curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo $VERSION_CODENAME)_all.deb" # If using Ubuntu derivates use $UBUNTU_CODENAME
+sudo apt install /tmp/ros2-apt-source.deb
+
 
 # 4. 安装ROS 2
 echo -e "\n${YELLOW}[4/5] 安装ROS 2${NC}"
 if [ "$install_type" -eq 1 ]; then
-    quiet sudo apt install ros-humble-desktop -y
+    sudo apt install ros-humble-desktop -y
 else
-    quiet sudo apt install ros-humble-ros-base -y
+    sudo apt install ros-humble-ros-base -y
 fi
 
 # 5. 安装开发工具
 echo -e "\n${YELLOW}[5/5] 安装开发工具${NC}"
-quiet sudo apt install ros-dev-tools -y
+run_command sudo apt install ros-dev-tools -y
 
 # 安装完成
-
+clear
 echo "======================================"
 echo -e "\n${GREEN}ROS 2 Humble 安装完成！${NC}"
 echo "======================================"
@@ -134,3 +140,4 @@ EOF
 else
     echo "ROS2初始化代码已存在于~/.bashrc中，跳过添加"   
 fi
+
