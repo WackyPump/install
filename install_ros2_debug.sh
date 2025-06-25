@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/bash# Reference: http://dev.ros2.fishros.com/doc/Installation/Ubuntu-Install-Binary.html
 # ROS 2 Humble Hawksbill Installation Script for Ubuntu
-# Reference: https:
+# Reference: http://dev.ros2.fishros.com/doc/Installation/Ubuntu-Install-Binary.html
 
 #set -euo pipefail
 set -e

@@ -1,5 +1,6 @@
 #!/bin/bash
 # ROS 2 Humble Hawksbill Installation Script for Ubuntu
+# Reference: http://dev.ros2.fishros.com/doc/Installation/Ubuntu-Install-Binary.html
 # 修改版：只输出进度提示，其他输出静默
 
 set -e
