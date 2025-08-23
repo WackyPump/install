@@ -1,0 +1,32 @@
+# Reference：https://ikuuu.top/user/tutorial?os=linux&client=clash
+
+下载：https://github.com/DustinWin/proxy-tools/releases/tag/Clash-Premium
+版本：`clashpremium-release-linux-amd64.tar.gz`
+将解压的文件修改为clash然后执行
+mv ClashCo?? clash
+文件夹也修改为clash
+
+`wget -O config.yaml "https://3x7xb.no-mad-world.club/link/BKV7KoeOGsaB9jCy?clash=3"`
+不可告诉别人
+
+~/.bashrc中配置
+# >>> Clash initialize >>>
+export CLASHPATH='/opt/clash'
+alias clash='sudo clash -d $CLASHPATH'
+# <<< Clash initialize <<<
+
+
+sudo visudo中安全路径写入'/opt/clash'
+
+
+配置VPN网点
+https://clash.razord.top/
+
+
+运行之后再配置，还需要下载对应db(自动下载)
+
+网络代理设置：
+127.0.0.1	7890
+127.0.0.1	7890
+/		/
+127.0.0.1	7891

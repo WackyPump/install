@@ -1,0 +1,18 @@
+
+wget https://ltspice.analog.com/software/LTspice64.msi
+
+安装Wine：
+sudo apt update   
+sudo apt install wine
+
+
+安装msi文件：wine msiexec /i LTspice64.msi
+安装exe文件：wine LTspiceXVII.exe
+
+
+
+重置Wine 配置：
+#有时 Wine 的初始化不完整，重新生成 Wine 环境可能解决问题：
+rm -rf ~/.wine           # 删除旧的 Wine 配置（先备份重要数据）   
+WINEARCH=win64 winecfg   # 重新初始化 64 位 Wine 环境
+
