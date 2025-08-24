@@ -105,7 +105,8 @@ deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe m
 # deb http://archive.ubuntu.com/ubuntu/ jammy-proposed main restricted universe multiverse
 # deb-src http://archive.ubuntu.com/ubuntu/ jammy-proposed main restricted universe multiverse
 EOF
-
+# 更新源
+quiet sudo apt-get update -y
 
 # 1. 设置区域设置
 echo -e "\n${YELLOW}[1/5] 设置区域配置${NC}"
