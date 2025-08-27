@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # TF卡烧录U-Boot脚本(三星ARM专用版)
-# 使用方法: sudo ./burn_samsung.sh [uboot镜像路径] [目标设备]
+# 使用方法: sudo ./brun_samsung.sh [uboot镜像路径] [目标设备]
 
 # 默认参数
 UBOOT_IMAGE="u-boot-samsung.bin"  # 修改为三星专用镜像名
